@@ -1373,7 +1373,8 @@ async function testNotification() {
 
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') checkNotifications(); });
 
-// ── INIT ──────────────────────────────────────────────────────────────
+// — INIT ————————————————————————————————————————
+firebase.auth().signInAnonymously().catch(err => console.error('Auth:', err));
 showLoader(true);
 initNotifications();
 Promise.race([
