@@ -1390,14 +1390,12 @@ Promise.race([
     showLogin();
   }
 }).catch(()=>showLogin());
-    showLoader(true);
-    initNotifications();
-    Promise.race([
-      fetchTeam(),
-      new Promise(r=>setTimeout(r,6000)) // 6s timeout
-    ]).then(()=>{
-      populateDropdowns();
-      const saved=sessionStorage.getItem('su');
+
+setInterval(fetchImages, 5000);
+setInterval(checkNotifications, 10000);
+</script>
+</body>
+</html>
       if(saved&&(teamData.members||[]).find(m=>m.name===saved&&m.active!==false)){
         document.getElementById('login-screen').classList.remove('show');
         activateUser(saved);
