@@ -1374,8 +1374,22 @@ async function testNotification() {
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') checkNotifications(); });
 
 // — INIT ————————————————————————————————————————
-firebase.auth().onAuthStateChanged(user => {
-  if (user) {
+showLoader(true);
+initNotifications();
+Promise.race([
+  fetchTeam(),
+  new Promise(r=>setTimeout(r,6000))
+]).then(()=>{
+  populateDropdowns();
+  const saved=sessionStorage.getItem('su');
+  if(saved&&(teamData.members||[]).find(m=>m.name===saved&&m.active!==false)){
+    document.getElementById('login-screen').classList.remove('show');
+    activateUser(saved);
+  } else {
+    if(saved)sessionStorage.removeItem('su');
+    showLogin();
+  }
+}).catch(()=>showLogin());
     showLoader(true);
     initNotifications();
     Promise.race([
