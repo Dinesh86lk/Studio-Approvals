@@ -1396,22 +1396,3 @@ setInterval(checkNotifications, 10000);
 </script>
 </body>
 </html>
-      if(saved&&(teamData.members||[]).find(m=>m.name===saved&&m.active!==false)){
-        document.getElementById('login-screen').classList.remove('show');
-        activateUser(saved);
-      } else {
-        if(saved)sessionStorage.removeItem('su');
-        showLogin();
-      }
-    }).catch(()=>showLogin());
-  }
-});
-
-firebase.auth().signInAnonymously().catch(err => console.error('Auth:', err));
-
-setInterval(fetchImages, 5000);
-// Check notifications every 10 seconds and on tab focus
-setInterval(checkNotifications, 10000);
-</script>
-</body>
-</html>
